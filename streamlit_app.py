@@ -32,7 +32,13 @@ class CVaR:
 
     def data(self):
         df = yf.download(self.ticker, self.start, self.end)
-        self.adj_close_df = df["Adj Close"]
+        if "Adj Close" in df.columns:
+            self.adj_close_df = df["Adj Close"]
+        elif "Close" in df.columns:
+            self.adj_close_df = df["Close"]
+        else:
+            raise KeyError("Neither 'Adj Close' nor 'Close' columns found in the data.")
+        
         self.log_returns_df = np.log(self.adj_close_df / self.adj_close_df.shift(1))
         self.log_returns_df = self.log_returns_df.dropna()
         self.equal_weights = np.array([1 / len(self.ticker)] * len(self.ticker))
@@ -76,7 +82,7 @@ if 'recent_outputs' not in st.session_state:
 # Sidebar for User Inputs
 with st.sidebar:
     st.title('📉 CVaR Calculator')
-    
+
     tickers = st.text_input('Enter tickers separated by space', 'AAPL MSFT GOOG').split()
     start_date = st.date_input('Start date', value=pd.to_datetime('2020-01-01'))
     end_date = st.date_input('End date', value=pd.to_datetime('today'))
