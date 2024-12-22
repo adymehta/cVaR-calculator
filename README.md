@@ -1,19 +1,13 @@
-# 🎈 Blank app template
+CVaR (Conditional Value at Risk) is a bit more neat than normal Value at Risk because you can capture tail-end risks by gauging the average loss beyond the VaR threshold. Would Taleb be proud?! Or maybe Bostrom to
 
-A simple Streamlit app template for you to modify!
+If you've seen my other projects, you know I'm overly reliant on the Yahoo Finance and Alpha Vantage APIs. It employs logarithmic returns for accuracy in compounding and uses rolling window calculations to simulate fluctuating market conditions. You can add in multiple tickers with equal-weighted portfolio allocation (I will work on making these adjustable). 
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://blank-app-template.streamlit.app/)
+One cool things I got to learn and implement were covariance matrix calculations to model asset correlations
 
-### How to run it on your own machine
+I included both the the historical method, which averages portfolio losses exceeding the VaR threshold, and the parametric method, which uses z-scores and expected returns to estimate tail risks analytically. 
 
-1. Install the requirements
+As always, everything's interactive + visual. Peace
 
-   ```
-   $ pip install -r requirements.txt
-   ```
 
-2. Run the app
 
-   ```
-   $ streamlit run streamlit_app.py
-   ```
+
